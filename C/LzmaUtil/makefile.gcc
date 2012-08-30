@@ -2,7 +2,10 @@ PROG = lzma
 CXX = g++
 LIB =
 RM = rm -f
-CFLAGS = -c -O2 -Wall
+
+# Try to make lzma run on either 32bit or 64bit target system
+CFLAGS   = -c -O2 -Wall -m32
+LDFLAGS += -m32
 
 OBJS = \
   LzmaUtil.o \

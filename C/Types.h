@@ -4,7 +4,9 @@
 #ifndef __7Z_TYPES_H
 #define __7Z_TYPES_H
 
+#ifndef BCMLZMA
 #include <stddef.h>
+#endif
 
 #ifdef _WIN32
 #include <windows.h>
@@ -40,7 +42,9 @@ typedef int WRes;
 #define RINOK(x) { int __result__ = (x); if (__result__ != 0) return __result__; }
 #endif
 
+#ifndef Byte
 typedef unsigned char Byte;
+#endif
 typedef short Int16;
 typedef unsigned short UInt16;
 

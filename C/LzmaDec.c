@@ -2,8 +2,9 @@
 2008-11-06 : Igor Pavlov : Public domain */
 
 #include "LzmaDec.h"
-
+#ifndef BCMLZMA
 #include <string.h>
+#endif
 
 #define kNumTopBits 24
 #define kTopValue ((UInt32)1 << kNumTopBits)
@@ -396,7 +397,7 @@ static int MY_FAST_CALL LzmaDec_DecodeReal(CLzmaDec *p, SizeT limit, const Byte 
         if (pos + curLen <= dicBufSize)
         {
           Byte *dest = dic + dicPos;
-          ptrdiff_t src = (ptrdiff_t)pos - (ptrdiff_t)dicPos;
+          int src = (int)pos - (int)dicPos;
           const Byte *lim = dest + curLen;
           dicPos += curLen;
           do
@@ -690,7 +691,7 @@ static void LzmaDec_InitRc(CLzmaDec *p, const Byte *data)
   p->needFlush = 0;
 }
 
-void LzmaDec_InitDicAndState(CLzmaDec *p, Bool initDic, Bool initState)
+static void LzmaDec_InitDicAndState(CLzmaDec *p, Bool initDic, Bool initState)
 {
   p->needFlush = 1;
   p->remainLen = 0;
